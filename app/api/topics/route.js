@@ -22,13 +22,14 @@ export async function POST(req) {
 
 export async function GET(request) {
   // const { id } = params;
+  await connectMongoDB();
   const topics = await Topic.find();
   return NextResponse.json({ topics }, { status: 200 });
 }
 export async function DELETE(request, { params }) {
   const { id } = req.query;
   console.log("id at backend",id);
-  // await connectMongoDB();
+  await connectMongoDB();
   const topic = await Topic.deleteOne({ _id: id });
   return NextResponse.json({ message: "deleted topc sucessfully" }, { status: 200 });
 }

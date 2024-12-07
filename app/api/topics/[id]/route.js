@@ -12,14 +12,14 @@ export async function PUT(request, { params }) {
 
 export async function GET(request, { params }) {
   const { id } = params;
-  // await connectMongoDB();
+  await connectMongoDB();
   const topic = await Topic.findOne({ _id: id });
   return NextResponse.json({ topic }, { status: 200 });
 }
 export async function DELETE(request, { params }) {
   const { id } = params;
   console.log("id at back 2 ",id);
-  // await connectMongoDB();
+  await connectMongoDB();
   const topic = await Topic.deleteOne({ _id: id });
   return NextResponse.json({message:"deleted topc sucessfully"}, { status: 200 });
 }

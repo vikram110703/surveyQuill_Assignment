@@ -1,12 +1,22 @@
 import mongoose from "mongoose";
 
 const connectMongoDB = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    console.log("Reusing existing database connection");
+    return;
+  }
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Connected to MongoDB.");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("New database connection established");
   } catch (error) {
-    console.log("Error in connecting MongoDb",error);
+    console.error("Error connecting to database:", error.message);
+    throw error;
   }
 };
 
 export default connectMongoDB;
+

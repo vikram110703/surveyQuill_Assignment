@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import connectMongoDB from "@/libs/mongodb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,12 +10,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  try {
-    await connectMongoDB();
-    console.log("successfully connected to DATABASE");
-  } catch (error) {
-      console.log("error in connecting DATABASE",error);
-  }
   return (
     <html lang="en">
       <body className={inter.className}>

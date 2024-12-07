@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BASE_URL from '@/libs/constant'
+import connectMongoDB from "@/libs/mongodb";
 
 export default function AddTopic() {
   const [title, setTitle] = useState("");

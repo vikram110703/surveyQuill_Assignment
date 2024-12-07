@@ -19,7 +19,7 @@ export default function AddTopic() {
     }
 
     try {
-      console.log("Reached at add topic page ",process.env.BASE_URL);
+      console.log("Reached at add topic page ",BASE_URL);
       const res = await fetch(`${BASE_URL}/api/topics`, {
         method: "POST",
         headers: {

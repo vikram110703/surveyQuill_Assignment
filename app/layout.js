@@ -11,7 +11,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  await connectMongoDB();
+  try {
+    await connectMongoDB();
+    console.log("successfully connected to DATABASE");
+  } catch (error) {
+      console.log("error in connecting DATABASE",error);
+  }
   return (
     <html lang="en">
       <body className={inter.className}>

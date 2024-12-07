@@ -9,7 +9,7 @@ import BASE_URL from '@/libs/constant'
 // Fetch topics function
 const getTopics = async () => {
   try {
-    const res = await axios.get(`${BASE_URL}/api/topics`);
+    const res = await axios.get(`/api/topics`);
     console.log("Data fetched: ", res.data);
     return res.data.topics;
   } catch (error) {

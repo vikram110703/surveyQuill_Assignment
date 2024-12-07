@@ -13,7 +13,7 @@ export default function RemoveBtn({ id,setRefresh,refresh }) {
 
     if (confirmed) {
       try {
-        const res = await axios.delete(`${BASE_URL}/api/topics/${id}`);
+        const res = await axios.delete(`/api/topics/${id}`);
         console.log("resp of delete ", res);
         setRefresh(!refresh);
       } catch (error) {

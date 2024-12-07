@@ -1,26 +1,28 @@
 import EditTopicForm from "@/components/EditTopicForm";
-import BASE_URL from '@/libs/constant'
+import BASE_URL from "@/libs/constant";
+import axios from "axios";
 
 const getTopicById = async (id) => {
   try {
-    const res = await fetch(`${BASE_URL}/api/topics/${id}`, {
-      cache: "no-store",
-    });
+    const {data}=await axios.get(`${BASE_URL}/api/topics/${id}`);
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch topic");
-    }
-
-    return res.json();
+    // const data = await res.json(); // Corrected response parsing
+    // console.log("Data fetched successfully:", data);
+    return data;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching topic:", error.message);
+    return null; // Return a fallback or handle gracefully
   }
 };
 
 export default async function EditTopic({ params }) {
   const { id } = params;
-  const { topic } = await getTopicById(id);
-  const { title, description } = topic;
+  // console.log("id ",id);
+  const {topic} = await getTopicById(id);
 
-  return <EditTopicForm id={id} title={title} description={description} />;
+  // Fallback values for empty or missing topic
+  const title = topic?.title || "Untitled";
+  const description = topic?.description || "No description available";
+
+  return <EditTopicForm id={id || 1} title={title} description={description} />;
 }
